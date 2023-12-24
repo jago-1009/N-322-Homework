@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "logan_project",
+    "slug": "snack-d9aaa868-130d-4576-93b0-e6ca2edc8479",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./img/379455400_283164724494435_7414287126426920948_n.png.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.jacogarw.snackd9aaa868130d457693b0e6ca2edc8479"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d79a63b5-ab58-4da9-91dc-525e7f26c61f"
+      }
+    }
+  }
+}

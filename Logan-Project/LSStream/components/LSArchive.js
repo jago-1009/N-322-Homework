@@ -13,14 +13,21 @@ import {
 	Dimensions,
 	Image,
 } from "react-native";
-import { Appbar, Modal, Icon, TextInput, List, IconButton } from "react-native-paper";
+import {
+	Appbar,
+	Modal,
+	Icon,
+	TextInput,
+	List,
+	IconButton,
+} from "react-native-paper";
 let i;
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BG_image from "../img/Logan_Kids_Background.png";
 import YoutubePlayer from "react-native-youtube-iframe";
 import * as ScreenOrientation from "expo-screen-orientation";
 export default function LSArchive({ navigation, route }) {
-	const playlistVidList = route.params
+	const playlistVidList = route.params;
 	const [playlistItems, setPlaylistItems] = useState([]);
 	const [videoTitle, setVideoTitle] = useState([]);
 	const [videoId, setvideoId] = useState([]);
@@ -58,23 +65,20 @@ export default function LSArchive({ navigation, route }) {
 				style={{
 					width: Dimensions.get("screen").width,
 					height: Dimensions.get("screen").height,
-					backgroundColor: "rgba(0,0,0,0.6)",
 				}}
 			>
-				<ScrollView nestedScrollEnabled={true}>
-					<IconButton 
-					icon="keyboard-backspace"
-					size={40}
-					style={styles.icon}
-					onPress={() => {
-									navigation.navigate("LoginScreen")
-								}} />
-						<Text style={styles.header}>{playlistVidList.PlaylistName}</Text>
+				<ScrollView nestedScrollEnabled={true} style={styles.container}>
+					<IconButton
+						icon="keyboard-backspace"
+						size={40}
+						style={styles.icon}
+						onPress={() => {
+							navigation.navigate("LoginScreen");
+						}}
+					/>
+					<Text style={styles.header}>{playlistVidList.PlaylistName}</Text>
 					{playlistItems.map((video, index) => (
-
-						
 						<View key={index}>
-						
 							<Text style={styles.textdebug}>{video.title}</Text>
 							<TouchableOpacity
 								onPress={() => {
@@ -83,10 +87,14 @@ export default function LSArchive({ navigation, route }) {
 									});
 								}}
 							>
-								
 								<Image
 									source={{ uri: video.thumbnails.high.url }}
-									style={{ width: 300, height: 200, alignSelf: "center" }}
+									style={{
+										width: 300,
+										height: 200,
+										marginBottom: 100,
+										alignSelf: "center",
+									}}
 									resizeMode="contain"
 								/>
 							</TouchableOpacity>
@@ -106,6 +114,8 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
+		backgroundColor: "rgba(0,0,0,0.6)",
+		height: Dimensions.get("screen").height + 100,
 	},
 	paragraph: {
 		margin: 24,
@@ -120,9 +130,11 @@ const styles = StyleSheet.create({
 	textdebug: {
 		textAlign: "center",
 		marginBottom: 20,
-		backgroundColor: "rgba(49,193,144,0.7)",
+		backgroundColor: "rgba(49,193,144,1)",
 		fontSize: 40,
 		fontWeight: "bold",
+		borderRadius: 30,
+		marginTop: 60,
 	},
 	background: {
 		width: Dimensions.get("screen").width,
@@ -135,22 +147,20 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 	},
 	header: {
-		position:'relative',
-		alignSelf:'center',
-		textAlign:'center',
-		fontSize:24,
-		bottom:20,
-		fontWeight: 'bold',
-		backgroundColor: "rgba(49,193,144,0.7)",
-		width:250,
-		borderRadius:30
+		position: "relative",
+		alignSelf: "center",
+		textAlign: "center",
+		fontSize: 24,
+		bottom: 20,
+		fontWeight: "bold",
+		backgroundColor: "rgba(49,193,144,1)",
+		width: 250,
+		borderRadius: 30,
 	},
 	icon: {
-		position:'relative',
-	
-		top:25,
-		backgroundColor: "rgba(49,193,144,0.7)",
+		position: "relative",
 
-	}
-	
+		top: 25,
+		backgroundColor: "rgba(49,193,144,1.7)",
+	},
 });

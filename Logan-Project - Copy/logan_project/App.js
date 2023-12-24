@@ -5,6 +5,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LSArchive from "./components/LSArchive";
 import LoginScreen from "./components/LoginScreen";
+import AccountScreen from "./components/AccountScreen";
+import WelcomeScreen from "./components/WelcomeScreen";
+import LogOutScreen from "./components/LogOutScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,9 +23,12 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
 					<Stack.Screen name="LoginScreen" component={LoginScreen} />
+					<Stack.Screen name="LogOutScreen" component={LogOutScreen} />
 					<Stack.Screen name="LSArchive" component={LSArchive} />
 					<Stack.Screen name="DetailListScreen" component={DetailListScreen} />
+					<Stack.Screen name="AccountScreen" component={AccountScreen} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</SafeAreaView>

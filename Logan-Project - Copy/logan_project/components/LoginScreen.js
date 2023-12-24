@@ -13,6 +13,7 @@ import {
 	Dimensions,
 	Image,
 } from "react-native";
+import { auth } from "../firebaseConfig";
 import { Appbar, Modal, TextInput, List, IconButton } from "react-native-paper";
 let i;
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -22,7 +23,7 @@ import YoutubePlayer from "react-native-youtube-iframe";
 export default function LoginScreen({ navigation }) {
 	const [Playlists, SetPlaylists] = useState([]);
 	const [PlaylistTitles, SetPlaylistTitles] = useState([]);
-
+	const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 	const ChannelID = "UC_JwOuH8Te6IOexL2QwnroQ";
 
 	useEffect(() => {
@@ -44,37 +45,57 @@ export default function LoginScreen({ navigation }) {
 	const containerStyle = { backgroundColor: "white", padding: 20 };
 	return (
 		<SafeAreaView style={styles.container}>
-			<ScrollView style = {{
-				width: Dimensions.get("screen").width,
-						height: Dimensions.get("screen").height,
-						backgroundColor: "rgba(0,0,0,0.6)",
-			}} >
+			<ScrollView style={styles.SafeArea}>
 				<View style={styles.container}>
-				<ImageBackground
-					resizeMode="cover"
-					source={BG_image}
-					style={{
-						width: Dimensions.get("screen").width,
-						height: Dimensions.get("screen").height,
-							
-					}}
-				>
-					<Text style={styles.header}>LS Stream</Text>
-					{PlaylistTitles.map((Playlist, index) => (
-						<View key={index}>
-							<TouchableOpacity
-								onPress={() => {
-									navigation.navigate("LSArchive", {
-										videoId: Playlists[index],
-										PlaylistName: PlaylistTitles[index],
-									});
-								}}
-							>
-								<Text style={styles.subtitle}>{Playlist}</Text>
-							</TouchableOpacity>
+					<ImageBackground
+						resizeMode="cover"
+						source={BG_image}
+						style={{
+							width: Dimensions.get("screen").width,
+							height: Dimensions.get("screen").height,
+						}}
+					>
+						<IconButton
+							icon="account"
+							style={styles.icon}
+							onPress={() => {
+								auth.onAuthStateChanged(function (user) {
+									if (user) {
+										navigation.navigate("LogOutScreen");
+									} else {
+										navigation.navigate("AccountScreen");
+									}
+								});
+							}}
+						></IconButton>
+						<IconButton
+							icon="keyboard-backspace"
+							style={styles.icon}
+							onPress={() => {
+								navigation.navigate("WelcomeScreen");
+							}}
+						></IconButton>
+						<View style={styles.container}>
+							<Image
+								style={styles.image}
+								source={require("../img/379455400_283164724494435_7414287126426920948_n.png")}
+							></Image>
+							{PlaylistTitles.map((Playlist, index) => (
+								<View key={index}>
+									<TouchableOpacity
+										onPress={() => {
+											navigation.navigate("LSArchive", {
+												videoId: Playlists[index],
+												PlaylistName: PlaylistTitles[index],
+											});
+										}}
+									>
+										<Text style={styles.subtitle}>{Playlist}</Text>
+									</TouchableOpacity>
+								</View>
+							))}
 						</View>
-					))}
-				</ImageBackground>
+					</ImageBackground>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
@@ -87,7 +108,6 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: "rgba(0,0,0,0.6)",
 	},
 	paragraph: {
 		margin: 24,
@@ -110,11 +130,12 @@ const styles = StyleSheet.create({
 		width: Dimensions.get("screen").width,
 		height: Dimensions.get("screen").height,
 	},
+	SafeArea: { backgroundColor: "#31C190" },
 	image: {
-		flex: 1,
-		height: null,
-		width: null,
+		height: 200,
+		width: 300,
 		alignSelf: "center",
+		objectFit: "contain",
 	},
 	header: {
 		marginTop: 30,
@@ -131,5 +152,9 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 40,
 		borderRadius: 30,
+	},
+	icon: {
+		backgroundColor: "rgba(0,0,0,0.2)",
+		tintColorcolor: "rgba(49,193,144,1)",
 	},
 });

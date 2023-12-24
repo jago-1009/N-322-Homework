@@ -54,7 +54,7 @@ export default function DetailListScreen({ navigation, route }) {
 						height: Dimensions.get("screen").height,
 					}}
 				>
-					<View style={{flex:1,justifyContent:'center'}}>
+					<View style={{ flex: 1, justifyContent: "center" }}>
 						<YoutubePlayer
 							height={300}
 							play={playing}
@@ -96,21 +96,20 @@ const styles = StyleSheet.create({
 		height: Dimensions.get("screen").height,
 	},
 	button: {
-		color:'#26332F',
-		alignSelf:'center',
-		textAlign:'center',
-		width:100,
-		backgroundColor:"#31C190",
-		borderRadius:30,
-		
+		color: "#26332F",
+		alignSelf: "center",
+		textAlign: "center",
+		width: 100,
+		backgroundColor: "#31C190",
+		borderRadius: 30,
 	},
 	buttonWrap: {
-		height:50,
-		alignSelf:'center',
-		textAlign:'center',
-		marginTop:'10%',
-		fontSize:24,
-		color:'#192320',
-		fontWeight:'bold'
-	}
+		height: 50,
+		alignSelf: "center",
+		textAlign: "center",
+		marginTop: "10%",
+		fontSize: 24,
+		color: "#192320",
+		fontWeight: "bold",
+	},
 });
